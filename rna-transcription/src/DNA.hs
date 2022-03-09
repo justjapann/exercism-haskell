@@ -1,9 +1,11 @@
 module DNA (toRNA) where
-
+  
 toRNA :: String -> Either Char String
-toRNA xs
-  | xs == "G" = "C"
-  | xs == "C" = "G"
-  | xs == "T" = "A"
-  | xs == "A" = "U"
-  | otherwise = xs
+toRNA = traverse fromDNA
+  where
+    fromDNA :: Char -> Either Char Char
+    fromDNA 'G' = pure 'C'
+    fromDNA 'C' = pure 'G'
+    fromDNA 'T' = pure 'A'
+    fromDNA 'A' = pure 'U'
+    fromDNA c = Left c
